@@ -18,6 +18,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         return token
 
 
+@api_view(['GET'])
 def createNewChat(request):
 
     title = request.get("title")
@@ -26,5 +27,7 @@ def createNewChat(request):
     chat = Chat.objects.create(title = title, messaging_service = messaging_service)
     chat.save()
 
-    return Response(chat)
+    serializer = ChatSerializer(chat, many=False, context={'request': request})
+
+    return Response(serializer.data)
 
