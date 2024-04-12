@@ -16,3 +16,9 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['username'] = user.username
 
         return token
+
+
+def createNewChat(request):
+
+    title = request.get("title")
+    selected_messaging_service = request.get("selected_messaging_service")

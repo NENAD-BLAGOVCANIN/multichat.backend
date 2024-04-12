@@ -68,3 +68,25 @@ class User(AbstractBaseUser):
     class Meta:
         db_table = "user"
 
+
+
+class MessagingService(BaseModel):
+    name = models.CharField(max_length=255)
+    description = models.CharField(max_length=355)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        db_table = "messaging_service"
+
+
+class Chat(BaseModel):
+    title = models.CharField(max_length=255)
+    messaging_service = models.ForeignKey(MessagingService, default=None, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        db_table = "chat"
