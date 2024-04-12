@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from main.models import User 
+from main.models import User, Chat, MessagingService
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
@@ -21,4 +21,10 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 def createNewChat(request):
 
     title = request.get("title")
-    selected_messaging_service = request.get("selected_messaging_service")
+    messaging_service = request.get("messaging_service")
+
+    chat = Chat.objects.create(title = title, messaging_service = messaging_service)
+    chat.save()
+
+    return Response(chat)
+
