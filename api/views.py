@@ -6,6 +6,7 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from datetime import datetime, timedelta
+from .serializers import ChatSerializer
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -18,16 +19,13 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         return token
 
 
-@api_view(['GET'])
+@api_view(['POST'])
 def createNewChat(request):
+    title = request.data.get("title")
+    messaging_service_name = request.data.get("messaging_service")
+    messaging_service = MessagingService.objects.filter(name=messaging_service_name).first()
 
-    title = request.get("title")
-    messaging_service = request.get("messaging_service")
-
-    chat = Chat.objects.create(title = title, messaging_service = messaging_service)
-    chat.save()
-
-    serializer = ChatSerializer(chat, many=False, context={'request': request})
+    chat = Chat.objects.create(title=title, messaging_service=messaging_service)
+    serializer = ChatSerializer(chat)
 
     return Response(serializer.data)
-

@@ -71,7 +71,8 @@ class User(AbstractBaseUser):
 
 
 class MessagingService(BaseModel):
-    name = models.CharField(max_length=255)
+    title = models.CharField(max_length=50, default="WhatsApp")
+    name = models.CharField(max_length=50, default="whatsapp")
     description = models.CharField(max_length=355)
 
     def __str__(self):
