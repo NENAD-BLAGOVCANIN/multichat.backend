@@ -85,9 +85,10 @@ class MessagingService(BaseModel):
 class Chat(BaseModel):
     title = models.CharField(max_length=255)
     messaging_service = models.ForeignKey(MessagingService, default=None, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name
+        return self.title
 
     class Meta:
         db_table = "chat"

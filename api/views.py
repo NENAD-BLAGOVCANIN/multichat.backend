@@ -26,6 +26,13 @@ def createNewChat(request):
     messaging_service = MessagingService.objects.filter(name=messaging_service_name).first()
 
     chat = Chat.objects.create(title=title, messaging_service=messaging_service)
-    serializer = ChatSerializer(chat)
+    serializer = ChatSerializer(chat, many=False, context={'request': request})
 
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getChats(request):
+
+    chats = Chat.objects.filter(user=request.user)
+    serializer = ChatSerializer(chats, many=True, context={'request': request})
     return Response(serializer.data)
