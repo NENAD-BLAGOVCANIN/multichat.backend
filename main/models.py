@@ -74,6 +74,7 @@ class MessagingService(BaseModel):
     title = models.CharField(max_length=50, default="WhatsApp")
     name = models.CharField(max_length=50, default="whatsapp")
     description = models.CharField(max_length=355)
+    icon = models.CharField(max_length=355, null=True)
 
     def __str__(self):
         return self.name
