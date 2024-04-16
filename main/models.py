@@ -72,6 +72,7 @@ class User(AbstractBaseUser):
 
 class MessagingService(BaseModel):
     title = models.CharField(max_length=50, default="WhatsApp")
+    url = models.CharField(max_length=150, default="https://web.whatsapp.com/")
     name = models.CharField(max_length=50, default="whatsapp")
     description = models.CharField(max_length=355)
     icon = models.CharField(max_length=355, null=True)
