@@ -37,3 +37,11 @@ def getChats(request):
 
     serializer = ChatSerializer(chats, many=True, context={'request': request})
     return Response(serializer.data)
+
+@api_view(['POST'])
+def deleteChat(request, chatId):
+
+    chat = Chat.objects.get(id=chatId)
+    chat.delete()
+
+    return Response("Success")
