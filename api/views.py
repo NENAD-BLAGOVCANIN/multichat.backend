@@ -45,3 +45,29 @@ def deleteChat(request, chatId):
     chat.delete()
 
     return Response("Success")
+
+
+from django.contrib.auth import authenticate, login
+from rest_framework.authtoken.models import Token
+
+@api_view(['POST'])
+def registerUser(request):
+    name = request.data.get("name")
+    email = request.data.get("email")
+    password = request.data.get("password")
+
+    if not all([name, email, password]):
+        return Response({"error": "Name, email, and password are required fields"}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        user = User.objects.create_user(email=email, username=email, password=password, name=name)
+        user = authenticate(request, username=email, password=password)
+        if user is not None:
+            login(request, user)
+            token, _ = Token.objects.get_or_create(user=user)
+            serializer = UserSerializer(user)
+            return Response({"user": serializer.data, "token": token.key}, status=status.HTTP_201_CREATED)
+        else:
+            return Response({"error": "Failed to authenticate user"}, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
