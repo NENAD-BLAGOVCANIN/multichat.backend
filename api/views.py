@@ -63,9 +63,8 @@ def registerUser(request):
         user = authenticate(request, username=email, password=password)
         if user is not None:
             login(request, user)
-            token, _ = Token.objects.get_or_create(user=user)
             serializer = UserSerializer(user)
-            return Response({"user": serializer.data, "token": token.key}, status=status.HTTP_201_CREATED)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response({"error": "Failed to authenticate user"}, status=status.HTTP_400_BAD_REQUEST)
     except Exception as e:
