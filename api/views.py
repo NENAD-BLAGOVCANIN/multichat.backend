@@ -6,8 +6,10 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from datetime import datetime, timedelta
-from .serializers import ChatSerializer
+from .serializers import ChatSerializer, UserSerializer
 from rest_framework import status
+from django.contrib.auth import authenticate, login
+from rest_framework.authtoken.models import Token
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -46,10 +48,6 @@ def deleteChat(request, chatId):
     chat.delete()
 
     return Response("Success")
-
-
-from django.contrib.auth import authenticate, login
-from rest_framework.authtoken.models import Token
 
 @api_view(['POST'])
 def registerUser(request):
