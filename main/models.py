@@ -96,3 +96,14 @@ class Chat(BaseModel):
 
     class Meta:
         db_table = "chat"
+
+
+class Session(BaseModel):
+    authorization = models.CharField(max_length=255, null=True)
+    chat = models.ForeignKey(Chat, null=True, on_delete=models.SET_NULL)
+
+    def __str__(self):
+        return self.authorization
+
+    class Meta:
+        db_table = "session"
