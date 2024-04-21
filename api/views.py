@@ -66,7 +66,7 @@ def registerUser(request):
         return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['POST'])
+@api_view(['GET'])
 def getMyUserInfo(request):
 
     user = request.user
