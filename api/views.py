@@ -64,3 +64,12 @@ def registerUser(request):
         return Response({"message": "User created successfully"}, status=status.HTTP_201_CREATED)
     except Exception as e:
         return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+def getMyUserInfo(request):
+
+    user = request.user
+    serializer = UserSerializer(user, many=False, context={'request': request})
+
+    return Response(serializer.data)
