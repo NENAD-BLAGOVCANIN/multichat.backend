@@ -6,8 +6,14 @@ class MessagingServiceSerializer(serializers.ModelSerializer):
         model = MessagingService
         fields = '__all__'
 
+class SessionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Session
+        fields = '__all__'
+
 class ChatSerializer(serializers.ModelSerializer):
     messaging_service = MessagingServiceSerializer()
+    session = SessionSerializer()
 
     class Meta:
         model = Chat

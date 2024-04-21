@@ -90,6 +90,7 @@ class Chat(BaseModel):
     title = models.CharField(max_length=255)
     messaging_service = models.ForeignKey(MessagingService, default=None, on_delete=models.CASCADE)
     user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    session = models.ForeignKey(Session, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
@@ -100,7 +101,6 @@ class Chat(BaseModel):
 
 class Session(BaseModel):
     authorization = models.CharField(max_length=255, null=True)
-    chat = models.ForeignKey(Chat, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.authorization
