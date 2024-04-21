@@ -13,7 +13,7 @@ class SessionSerializer(serializers.ModelSerializer):
 
 class ChatSerializer(serializers.ModelSerializer):
     messaging_service = MessagingServiceSerializer()
-    session = SessionSerializer()
+    session = SessionSerializer(required=False, allow_null=True)
 
     class Meta:
         model = Chat
