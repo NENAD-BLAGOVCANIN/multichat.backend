@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from main.models import Chat, MessagingService, User
+from main.models import Chat, MessagingService, User, Session
 
 class MessagingServiceSerializer(serializers.ModelSerializer):
     class Meta:
