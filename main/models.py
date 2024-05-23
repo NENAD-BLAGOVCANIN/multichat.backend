@@ -53,7 +53,6 @@ class User(AbstractBaseUser):
     is_deleted = models.BooleanField(default=False)
     notifications = models.BooleanField(default=True)
     audio_notifications = models.BooleanField(default=True)
-    download_path = models.CharField(max_length=100, default="/Downloads")
 
     objects = MyUserManager()
 
