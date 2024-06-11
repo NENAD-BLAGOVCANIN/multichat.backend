@@ -51,8 +51,8 @@ class User(AbstractBaseUser):
     is_admin = models.BooleanField(default=False)
     date_joined = models.DateTimeField(auto_now=True)
     is_deleted = models.BooleanField(default=False)
-    # notifications = models.BooleanField(default=True)
-    # audio_notifications = models.BooleanField(default=True)
+    notifications = models.BooleanField(default=True)
+    audio_notifications = models.BooleanField(default=True)
 
     objects = MyUserManager()
 
@@ -102,8 +102,8 @@ class Chat(BaseModel):
     messaging_service = models.ForeignKey(MessagingService, default=None, on_delete=models.CASCADE)
     user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     session = models.ForeignKey(Session, null=True, on_delete=models.CASCADE)
-    # notifications = models.BooleanField(default=True)
-    # audio_notifications = models.BooleanField(default=True)
+    notifications = models.BooleanField(default=True)
+    audio_notifications = models.BooleanField(default=True)
     
     def __str__(self):
         return self.title
