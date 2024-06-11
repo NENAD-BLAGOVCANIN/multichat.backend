@@ -10,6 +10,7 @@ from .serializers import ChatSerializer, UserSerializer
 from rest_framework import status
 from django.contrib.auth import authenticate, login
 from rest_framework.authtoken.models import Token
+from django.contrib.auth.decorators import login_required
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -21,7 +22,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         return token
 
-
+@login_required
 @api_view(['POST'])
 def createNewChat(request):
     title = request.data.get("title")
@@ -34,6 +35,7 @@ def createNewChat(request):
 
     return Response(serializer.data)
 
+@login_required
 @api_view(['GET'])
 def getChats(request):
 
@@ -42,6 +44,7 @@ def getChats(request):
     serializer = ChatSerializer(chats, many=True, context={'request': request})
     return Response(serializer.data)
 
+@login_required
 @api_view(['POST'])
 def deleteChat(request, chatId):
 
@@ -66,6 +69,7 @@ def registerUser(request):
         return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 
+@login_required
 @api_view(['GET'])
 def getMyUserInfo(request):
 
