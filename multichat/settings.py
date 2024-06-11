@@ -11,10 +11,6 @@ ALLOWED_HOSTS = ['*']
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    "http://localhost:8000",
-    "127.0.0.1",
-    "https://multi-chat.io",
-    "https://api.multi-chat.io"
 ]
 
 AUTH_USER_MODEL = "main.User"
