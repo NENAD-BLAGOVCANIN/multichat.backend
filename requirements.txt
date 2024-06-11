@@ -141,12 +141,6 @@ srt==3.5.3
 streamlit==1.22.0
 svglib==1.5.1
 tenacity==8.2.2
-tensorboard==2.12.3
-tensorboard-data-server==0.7.1
-tensorflow==2.12.0
-tensorflow-estimator==2.12.0
-tensorflow-intel==2.12.0
-tensorflow-io-gcs-filesystem==0.31.0
 termcolor==2.3.0
 tifffile==2023.7.4
 tinycss2==1.2.1
