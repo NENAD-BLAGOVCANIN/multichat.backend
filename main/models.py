@@ -103,7 +103,7 @@ class Chat(BaseModel):
     user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     session = models.ForeignKey(Session, null=True, on_delete=models.CASCADE)
     notifications = models.BooleanField(default=True)
-    audio_notifications = models.BooleanField(default=True)
+    #audio_notifications = models.BooleanField(default=True)
     
     def __str__(self):
         return self.title
