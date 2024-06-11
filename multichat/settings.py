@@ -1,9 +1,9 @@
 from pathlib import Path
 from datetime import datetime, timedelta
-from dotenv import load_dotenv
-import os
+# from dotenv import load_dotenv
+# import os
 
-load_dotenv()
+# load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -75,11 +75,11 @@ WSGI_APPLICATION = 'multichat.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ.get('DB_NAME'),
+        'NAME': 'multichat',
         'PORT': '3306',
-        'PASSWORD': os.environ.get('DB_PASSWORD'),
-        'HOST': os.environ.get('DB_HOST'),
-        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': 'someSecurePassword',
+        'HOST': 'localhost',
+        'USER': 'root',
         'OPTIONS': {
             'charset': 'utf8mb4',
             'init_command': "SET collation_connection = 'utf8mb4_unicode_ci'",
