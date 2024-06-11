@@ -7,11 +7,13 @@ SECRET_KEY = 'django-insecure-y5%o!nltc075ls)r9+3^cgkm4c5pa(8&m(@8pl+-mgjr+bjsqt
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://multi-chat.io', 'http://localhost:3000']
+ALLOWED_HOSTS = ['https://multi-chat.io', 'https://api.multi-chat.io', 'http://localhost:3000', 'http://localhost:8000']
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    "https://multi-chat.io"
+    "http://localhost:8000",
+    "https://multi-chat.io",
+    "https://api.multi-chat.io"
 ]
 
 AUTH_USER_MODEL = "main.User"
