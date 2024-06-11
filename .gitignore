@@ -24,5 +24,5 @@ TestResults.xml
 */migrations/
 .env
 *.pyc
-/venv/
+/venv
 /__pycache__
