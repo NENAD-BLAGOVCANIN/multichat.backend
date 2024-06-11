@@ -52,7 +52,7 @@ class User(AbstractBaseUser):
     date_joined = models.DateTimeField(auto_now=True)
     is_deleted = models.BooleanField(default=False)
     notifications = models.BooleanField(default=True)
-    #audio_notifications = models.BooleanField(default=True)
+    audio_notifications = models.BooleanField(default=True)
 
     objects = MyUserManager()
 
