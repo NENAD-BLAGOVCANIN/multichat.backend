@@ -11,7 +11,7 @@ SECRET_KEY = 'django-insecure-y5%o!nltc075ls)r9+3^cgkm4c5pa(8&m(@8pl+-mgjr+bjsqt
 
 DEBUG = os.environ.get('DEBUG')
 
-ALLOWED_HOSTS = ['api.multi-chat.io']
+ALLOWED_HOSTS = ['*']
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
