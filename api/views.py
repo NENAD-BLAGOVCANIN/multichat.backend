@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from main.models import User, Chat, MessagingService, Session
+from main.models import User, Chat, MessagingService
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
@@ -28,7 +28,22 @@ def createNewChat(request):
     messaging_service = MessagingService.objects.filter(name=messaging_service_name).first()
 
     chat = Chat.objects.create(title=title, messaging_service=messaging_service, user=request.user)
-    session = Session.objects.create(chat=chat)
+    serializer = ChatSerializer(chat, many=False, context={'request': request})
+
+    return Response(serializer.data)
+
+@api_view(['PUT'])
+def editChat(request, chatId):
+    title = request.data.get("title")
+    audio_notifications = request.data.get("audio_notifications")
+    notifications = request.data.get("notifications")
+
+    chat = Chat.objects.get(id=chatId)
+    chat.title = title
+    chat.audio_notifications = audio_notifications
+    chat.notifications = notifications
+    chat.save()
+    
     serializer = ChatSerializer(chat, many=False, context={'request': request})
 
     return Response(serializer.data)

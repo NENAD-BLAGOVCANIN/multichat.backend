@@ -3,7 +3,7 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
-from .views import createNewChat, getChats, deleteChat, registerUser, getMyUserInfo
+from .views import createNewChat, editChat, getChats, deleteChat, registerUser, getMyUserInfo
 
 urlpatterns = [
 
@@ -15,6 +15,7 @@ urlpatterns = [
 
 
     path('chats/create', createNewChat, name='api.createNewChat'),
+    path('chat/<chatId>', editChat, name='api.editChat'),
     path('chats/get', getChats, name='api.getChats'),
     path('chats/delete/<chatId>', deleteChat, name='api.deleteChat'),
 

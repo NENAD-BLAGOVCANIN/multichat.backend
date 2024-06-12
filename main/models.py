@@ -86,22 +86,10 @@ class MessagingService(BaseModel):
     class Meta:
         db_table = "messaging_service"
 
-
-class Session(BaseModel):
-    authorization = models.CharField(max_length=255, null=True)
-
-    def __str__(self):
-        return self.authorization
-
-    class Meta:
-        db_table = "session"
-
-
 class Chat(BaseModel):
     title = models.CharField(max_length=255)
     messaging_service = models.ForeignKey(MessagingService, default=None, on_delete=models.CASCADE)
     user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
-    session = models.ForeignKey(Session, null=True, on_delete=models.CASCADE)
     notifications = models.BooleanField(default=True)
     audio_notifications = models.BooleanField(default=True)
     

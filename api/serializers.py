@@ -1,19 +1,13 @@
 from rest_framework import serializers
-from main.models import Chat, MessagingService, User, Session
+from main.models import Chat, MessagingService, User
 
 class MessagingServiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = MessagingService
         fields = '__all__'
 
-class SessionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Session
-        fields = '__all__'
-
 class ChatSerializer(serializers.ModelSerializer):
     messaging_service = MessagingServiceSerializer()
-    session = SessionSerializer(required=False, allow_null=True)
 
     class Meta:
         model = Chat
