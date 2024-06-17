@@ -77,7 +77,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'multichat',
         'PORT': '3306',
-        'PASSWORD': '314159265',
+        'PASSWORD': 'someSecurePassword',
         'HOST': 'localhost',
         'USER': 'multichat',
         'OPTIONS': {
