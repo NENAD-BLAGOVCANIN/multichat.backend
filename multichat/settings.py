@@ -77,9 +77,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'multichat',
         'PORT': '3306',
-        'PASSWORD': '',
+        'PASSWORD': '314159265',
         'HOST': 'localhost',
-        'USER': 'root',
+        'USER': 'multichat',
         'OPTIONS': {
             'charset': 'utf8mb4',
             'init_command': "SET collation_connection = 'utf8mb4_unicode_ci'",
