@@ -13,10 +13,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "https://multi-chat.io",
-]
+#CORS_ALLOWED_ORIGINS = [
+#    "http://localhost:3000",
+#    "https://multi-chat.io",
+#]
 
 AUTH_USER_MODEL = "main.User"
 
@@ -168,4 +168,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
-CORS_ALLOW_ALL_OGIRINGS = True
+CORS_ALLOW_ALL_ORIGINS = True
