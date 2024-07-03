@@ -1,0 +1,99 @@
+[
+    {
+        "model": "main.messagingservice",
+        "pk": 1,
+        "fields": {
+            "created_at": "2024-04-13T06:34:43.998Z",
+            "updated_at": "2024-04-13T06:34:43.998Z",
+            "is_deleted": false,
+            "title": "WhatsApp",
+            "url": "https://web.whatsapp.com/",
+            "name": "whatsapp",
+            "description": "Some quick example text to build on the card title and make up the bulk of the card's content.",
+            "icon": "http://localhost:8000/static/main/img/WhatsAppLogo.svg"
+        }
+    },
+    {
+        "model": "main.messagingservice",
+        "pk": 2,
+        "fields": {
+            "created_at": "2024-04-13T06:34:38.570Z",
+            "updated_at": "2024-04-13T06:34:38.570Z",
+            "is_deleted": false,
+            "title": "Telegram",
+            "url": "https://web.telegram.org/a/",
+            "name": "telegram",
+            "description": "Some quick example text to build on the card title and make up the bulk of the card's content.",
+            "icon": "http://localhost:8000/static/main/img/TelegramLogo.svg"
+        }
+    },
+    {
+        "model": "main.messagingservice",
+        "pk": 3,
+        "fields": {
+            "created_at": "2024-04-13T06:34:43.998Z",
+            "updated_at": "2024-04-13T06:34:43.998Z",
+            "is_deleted": false,
+            "title": "WeChat",
+            "url": "https://web.wechat.com/",
+            "name": "wechat",
+            "description": "Some quick example text to build on the card title and make up the bulk of the card's content.",
+            "icon": "http://localhost:8000/static/main/img/WeChatLogo.svg"
+        }
+    },
+    {
+        "model": "main.messagingservice",
+        "pk": 4,
+        "fields": {
+            "created_at": "2024-04-13T06:34:43.998Z",
+            "updated_at": "2024-04-13T06:34:43.998Z",
+            "is_deleted": false,
+            "title": "Skype",
+            "url": "https://web.skype.com/",
+            "name": "skype",
+            "description": "Some quick example text to build on the card title and make up the bulk of the card's content.",
+            "icon": "http://localhost:8000/static/main/img/SkypeLogo.svg"
+        }
+    },
+    {
+        "model": "main.messagingservice",
+        "pk": 5,
+        "fields": {
+            "created_at": "2024-04-13T06:34:38.570Z",
+            "updated_at": "2024-04-13T06:34:38.570Z",
+            "is_deleted": false,
+            "title": "Messenger",
+            "url": "https://messenger.com/",
+            "name": "messenger",
+            "description": "Some quick example text to build on the card title and make up the bulk of the card's content.",
+            "icon": "http://localhost:8000/static/main/img/MessengerLogo.svg"
+        }
+    },
+    {
+        "model": "main.subscription",
+        "pk": null,
+        "fields": {
+            "title": "Free",
+            "cost": 0,
+            "max_tabs": 5
+        }
+    },
+    {
+        "model": "main.subscription",
+        "pk": null,
+        "fields": {
+            "title": "Standard Plan",
+            "cost": 9.99,
+            "max_tabs": 20
+        }
+    },
+    {
+        "model": "main.subscription",
+        "pk": null,
+        "fields": {
+            "title": "Pro Plan",
+            "cost": 19.99,
+            "max_tabs": null
+        }
+    }
+]

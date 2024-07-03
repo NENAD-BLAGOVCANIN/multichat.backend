@@ -12,6 +12,18 @@ class BaseModel(models.Model):
         abstract = True
 
 
+class Subscription(BaseModel):
+    title = models.CharField(max_length=50, default="WhatsApp")
+    cost = models.IntegerField(default=0)
+    max_tabs = models.IntegerField(default=5, null=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        db_table = "subscription"
+
+
 class MyUserManager(BaseUserManager):
     def create_user(self, email, username, password=None, name=None):
         if not email:
