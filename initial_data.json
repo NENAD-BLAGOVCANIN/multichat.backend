@@ -71,7 +71,7 @@
     },
     {
         "model": "main.subscription",
-        "pk": null,
+        "pk": 1,
         "fields": {
             "title": "Free",
             "cost": 0,
@@ -82,7 +82,7 @@
     },
     {
         "model": "main.subscription",
-        "pk": null,
+        "pk": 2,
         "fields": {
             "title": "Standard Plan",
             "cost": 9.99,
@@ -93,7 +93,7 @@
     },
     {
         "model": "main.subscription",
-        "pk": null,
+        "pk": 3,
         "fields": {
             "title": "Pro Plan",
             "cost": 19.99,
