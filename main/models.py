@@ -66,7 +66,7 @@ class User(AbstractBaseUser):
     notifications = models.BooleanField(default=True)
     audio_notifications = models.BooleanField(default=True)
     subscription = models.ForeignKey(
-        Subscription, on_delete=models.SET_NULL, null=True, default=1
+        Subscription, on_delete=models.SET_NULL, null=True
     )
 
     objects = MyUserManager()
