@@ -75,7 +75,9 @@
         "fields": {
             "title": "Free",
             "cost": 0,
-            "max_tabs": 5
+            "max_tabs": 5,
+            "created_at": "2024-04-13T06:34:38.570Z",
+            "updated_at": "2024-04-13T06:34:38.570Z"
         }
     },
     {
@@ -84,7 +86,9 @@
         "fields": {
             "title": "Standard Plan",
             "cost": 9.99,
-            "max_tabs": 20
+            "max_tabs": 20,
+            "created_at": "2024-04-13T06:34:38.570Z",
+            "updated_at": "2024-04-13T06:34:38.570Z"
         }
     },
     {
@@ -93,7 +97,9 @@
         "fields": {
             "title": "Pro Plan",
             "cost": 19.99,
-            "max_tabs": null
+            "max_tabs": null,
+            "created_at": "2024-04-13T06:34:38.570Z",
+            "updated_at": "2024-04-13T06:34:38.570Z"
         }
     }
 ]
