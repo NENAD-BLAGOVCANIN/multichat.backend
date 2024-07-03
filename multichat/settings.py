@@ -74,16 +74,12 @@ WSGI_APPLICATION = 'multichat.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': os.getenv('DB_NAME'),
         'PORT': '3306',
         'PASSWORD': os.getenv('DB_PASSWORD'),
         'HOST': os.getenv('DB_HOST'),
         'USER': os.getenv('DB_USER'),
-        'OPTIONS': {
-            'charset': 'utf8mb4',
-            'init_command': "SET collation_connection = 'utf8mb4_unicode_ci'",
-        },
     }
 }
 
