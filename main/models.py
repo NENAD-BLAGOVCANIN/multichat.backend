@@ -101,15 +101,15 @@ class MessagingService(BaseModel):
     class Meta:
         db_table = "messaging_service"
 
-class Chat(BaseModel):
-    title = models.CharField(max_length=255)
-    messaging_service = models.ForeignKey(MessagingService, default=None, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
-    notifications = models.BooleanField(default=True)
-    audio_notifications = models.BooleanField(default=True)
+# class Chat(BaseModel):
+#     title = models.CharField(max_length=255)
+#     messaging_service = models.ForeignKey(MessagingService, default=None, on_delete=models.CASCADE)
+#     user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+#     notifications = models.BooleanField(default=True)
+#     audio_notifications = models.BooleanField(default=True)
     
-    def __str__(self):
-        return self.title
+#     def __str__(self):
+#         return self.title
 
-    class Meta:
-        db_table = "chat"
+#     class Meta:
+#         db_table = "chat"
