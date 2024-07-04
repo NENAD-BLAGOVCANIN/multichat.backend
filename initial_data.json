@@ -1,5 +1,62 @@
 [
     {
+        "model": "main.user",
+        "pk": 1,
+        "fields": {
+            "password": "pbkdf2_sha256$390000$aJs3IYz17zOqbWFc6CeEYV$fKF5vCCEh/ZGOYlyMsNiB55mmb0pfYN6e68D6jiisS4=",
+            "email": "nenadblagovcanin2@gmail.com",
+            "username": "nenad2807",
+            "name": "Nenad Blagovcanin",
+            "last_login": "2024-04-12T20:09:15.382Z",
+            "is_active": true,
+            "is_superuser": true,
+            "is_staff": true,
+            "is_admin": true,
+            "date_joined": "2024-04-10T18:41:31.987Z",
+            "is_deleted": false,
+            "notifications": true,
+            "audio_notifications": true
+        }
+    },
+    {
+        "model": "main.user",
+        "pk": 2,
+        "fields": {
+            "password": "pbkdf2_sha256$390000$YefaLN8mKCzzvhA5OuaGEY$5nBkN7mt4ipHl0DvLsLolC7KPQqRsZhkGAQ0ITTc7DM=",
+            "email": "everwhat31415@gmail.com",
+            "username": "everwhat31415@gmail.com",
+            "name": "What Ever",
+            "last_login": "2024-04-12T20:07:31.464Z",
+            "is_active": true,
+            "is_superuser": true,
+            "is_staff": true,
+            "is_admin": true,
+            "date_joined": "2024-04-12T20:07:31.464Z",
+            "is_deleted": false,
+            "notifications": true,
+            "audio_notifications": true
+        }
+    },
+    {
+        "model": "main.user",
+        "pk": 3,
+        "fields": {
+            "password": "pbkdf2_sha256$720000$cHVe4TZGLcw4YaFiZF13p5$Ch0/XhtPC97Y0mAukwmNRimKtUdBTkZKHT/Up+cziaY=",
+            "email": "jp@ckah.io",
+            "username": "jp@ckah.io",
+            "name": "jpoc",
+            "last_login": "2024-04-12T20:07:31.464Z",
+            "is_active": true,
+            "is_superuser": true,
+            "is_staff": true,
+            "is_admin": true,
+            "date_joined": "2024-04-12T20:07:31.464Z",
+            "is_deleted": false,
+            "notifications": true,
+            "audio_notifications": true
+        }
+    },
+    {
         "model": "main.messagingservice",
         "pk": 1,
         "fields": {
