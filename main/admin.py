@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-# from main.models import User, MessagingService, Chat
+from main.models import User, MessagingService, Chat
 
 
 class AccountAdmin(UserAdmin):
@@ -13,6 +13,6 @@ class AccountAdmin(UserAdmin):
     list_filter = ()
     fieldsets = ()
 
-# admin.site.register(User, AccountAdmin)
-# admin.site.register(Chat)
-# admin.site.register(MessagingService)
+admin.site.register(User, AccountAdmin)
+admin.site.register(Chat)
+admin.site.register(MessagingService)
