@@ -14,5 +14,5 @@ class AccountAdmin(UserAdmin):
     fieldsets = ()
 
 # admin.site.register(User, AccountAdmin)
-admin.site.register(Chat)
-admin.site.register(MessagingService)
+# admin.site.register(Chat)
+# admin.site.register(MessagingService)
