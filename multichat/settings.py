@@ -18,7 +18,7 @@ ALLOWED_HOSTS = ['*']
 #    "https://multi-chat.io",
 #]
 
-AUTH_USER_MODEL = "main.User"
+# AUTH_USER_MODEL = "main.User"
 
 INSTALLED_APPS = [
     'django.contrib.admin',
