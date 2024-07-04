@@ -20,8 +20,8 @@ class Subscription(BaseModel):
     def __str__(self):
         return self.title
 
-    class Meta:
-        db_table = "subscription"
+    # class Meta:
+    #     db_table = "subscription"
 
 
 class MyUserManager(BaseUserManager):
@@ -83,8 +83,8 @@ class User(AbstractBaseUser):
     def has_module_perms(self, app_label):
         return True
 
-    class Meta:
-        db_table = "user"
+    # class Meta:
+    #     db_table = "user"
 
 
 
