@@ -63,11 +63,11 @@ class User(AbstractBaseUser):
     is_admin = models.BooleanField(default=False)
     date_joined = models.DateTimeField(auto_now=True)
     is_deleted = models.BooleanField(default=False)
-    # notifications = models.BooleanField(default=True)
-    # audio_notifications = models.BooleanField(default=True)
-    # subscription = models.ForeignKey(
-    #     Subscription, on_delete=models.SET_NULL, null=True
-    # )
+    notifications = models.BooleanField(default=True)
+    audio_notifications = models.BooleanField(default=True)
+    subscription = models.ForeignKey(
+        Subscription, on_delete=models.SET_NULL, null=True
+    )
 
     objects = MyUserManager()
 
