@@ -74,12 +74,12 @@ WSGI_APPLICATION = 'multichat.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': os.getenv('DB_ENGINE'),
-        'NAME': os.getenv('DB_NAME'),
-        'PORT': os.getenv('DB_PORT'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),
-        'USER': os.getenv('DB_USER'),
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': 'multichat', 
+        'PORT': '3306', 
+        'PASSWORD': 'someSecurePassword', 
+        'HOST': 'localhost', 
+        'USER': 'multichat'
     }
 }
 
