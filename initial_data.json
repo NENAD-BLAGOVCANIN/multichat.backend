@@ -67,7 +67,7 @@
             "url": "https://web.whatsapp.com/",
             "name": "whatsapp",
             "description": "Some quick example text to build on the card title and make up the bulk of the card's content.",
-            "icon": "https://multi-chat.io/static/main/img/WhatsAppLogo.svg"
+            "icon": "https://api.multi-chat.io/static/main/img/WhatsAppLogo.svg"
         }
     },
     {
@@ -81,7 +81,7 @@
             "url": "https://web.telegram.org/a/",
             "name": "telegram",
             "description": "Some quick example text to build on the card title and make up the bulk of the card's content.",
-            "icon": "https://multi-chat.io/static/main/img/TelegramLogo.svg"
+            "icon": "https://api.multi-chat.io/static/main/img/TelegramLogo.svg"
         }
     },
     {
@@ -95,7 +95,7 @@
             "url": "https://web.wechat.com/",
             "name": "wechat",
             "description": "Some quick example text to build on the card title and make up the bulk of the card's content.",
-            "icon": "https://multi-chat.io/static/main/img/WeChatLogo.svg"
+            "icon": "https://api.multi-chat.io/static/main/img/WeChatLogo.svg"
         }
     },
     {
@@ -109,7 +109,7 @@
             "url": "https://web.skype.com/",
             "name": "skype",
             "description": "Some quick example text to build on the card title and make up the bulk of the card's content.",
-            "icon": "https://multi-chat.io/static/main/img/SkypeLogo.svg"
+            "icon": "https://api.multi-chat.io/static/main/img/SkypeLogo.svg"
         }
     },
     {
@@ -123,7 +123,7 @@
             "url": "https://messenger.com/",
             "name": "messenger",
             "description": "Some quick example text to build on the card title and make up the bulk of the card's content.",
-            "icon": "https://multi-chat.io/static/main/img/MessengerLogo.svg"
+            "icon": "https://api.multi-chat.io/static/main/img/MessengerLogo.svg"
         }
     },
     {
@@ -137,7 +137,7 @@
             "url": "https://discord.com/channels/@me",
             "name": "discord",
             "description": "Some quick example text to build on the card title and make up the bulk of the card's content.",
-            "icon": "https://multi-chat.io/static/main/img/DiscordLogo.svg"
+            "icon": "https://api.multi-chat.io/static/main/img/DiscordLogo.svg"
         }
     },
     {
