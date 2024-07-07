@@ -23,6 +23,15 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
 @api_view(['POST'])
 def createNewChat(request):
+
+    user = request.user
+
+    if userHasMaxTabs(user):
+        return Response(
+            {"detail": "You have reached the maximum number of tabs allowed."},
+            status=status.HTTP_403_FORBIDDEN
+        )
+
     title = request.data.get("title")
     messaging_service_name = request.data.get("messaging_service")
     messaging_service = MessagingService.objects.filter(name=messaging_service_name).first()
@@ -87,3 +96,17 @@ def getMyUserInfo(request):
     serializer = UserSerializer(user, many=False, context={'request': request})
 
     return Response(serializer.data)
+
+
+def userHasMaxTabs(user):
+
+    existing_users_tabs_count = Chat.objects.filter(user=user, is_deleted=0).count()
+    allowed_no_of_tabs = user.subscription.max_tabs
+
+    print(existing_users_tabs_count)
+    print(allowed_no_of_tabs)
+
+    if(existing_users_tabs_count==allowed_no_of_tabs):
+        return True
+
+    return False
