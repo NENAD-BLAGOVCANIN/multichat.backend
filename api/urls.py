@@ -19,4 +19,9 @@ urlpatterns = [
     path('chats/get', getChats, name='api.getChats'),
     path('chats/delete/<chatId>', deleteChat, name='api.deleteChat'),
 
+
+    #Stripe
+    path('payments/received', paymentReceived, name='api.paymentReceived'),
+
+
 ]

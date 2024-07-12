@@ -10,6 +10,7 @@ from .serializers import ChatSerializer, UserSerializer
 from rest_framework import status
 from django.contrib.auth import authenticate, login
 from rest_framework.authtoken.models import Token
+import stripe
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -110,3 +111,34 @@ def userHasMaxTabs(user):
         return True
 
     return False
+
+@api_view(['POST'])
+def paymentReceived(request):
+
+    stripe.api_key = "sk_test_51I8KTqAHonOpKVtAcG8tFNejf9Q4ZpQviNN1Zch4b9ZJ1BsdRj4Kes3hd0VvxBBSqSpjG0k6F9A8Cwep605NW4N700bH2J6zx7"
+    endpoint_secret = 'whsec_b26789f7ada3b144544536b0661c20cd4723b24715d49f6d5d066a4927bf232b'
+
+
+    event = None
+    payload = request.data
+    sig_header = request.headers['STRIPE_SIGNATURE']
+
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, endpoint_secret
+        )
+    except ValueError as e:
+        # Invalid payload
+        raise e
+    except stripe.error.SignatureVerificationError as e:
+        # Invalid signature
+        raise e
+
+    # Handle the event
+    if event['type'] == 'checkout.session.completed':
+        session = event['data']['object']
+    # ... handle other event types
+    else:
+      print('Unhandled event type {}'.format(event['type']))
+
+    return Response({"message": "Payment received successfully"})
