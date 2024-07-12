@@ -3,7 +3,7 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
-from .views import createNewChat, editChat, getChats, deleteChat, registerUser, getMyUserInfo
+from .views import createNewChat, editChat, getChats, deleteChat, registerUser, getMyUserInfo, paymentReceived
 
 urlpatterns = [
 
