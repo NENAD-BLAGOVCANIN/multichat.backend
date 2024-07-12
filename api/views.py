@@ -116,11 +116,11 @@ def userHasMaxTabs(user):
 def paymentReceived(request):
 
     stripe.api_key = "sk_test_51I8KTqAHonOpKVtAcG8tFNejf9Q4ZpQviNN1Zch4b9ZJ1BsdRj4Kes3hd0VvxBBSqSpjG0k6F9A8Cwep605NW4N700bH2J6zx7"
-    endpoint_secret = 'sk_test_51I8KTqAHonOpKVtAcG8tFNejf9Q4ZpQviNN1Zch4b9ZJ1BsdRj4Kes3hd0VvxBBSqSpjG0k6F9A8Cwep605NW4N700bH2J6zx7'
+    endpoint_secret = 'whsec_xCKfcEvXHhwvPceNnrYVwGfCaunfHUqq'
 
 
     event = None
-    payload = request.data
+    payload = request.body.decode('utf-8')
     sig_header = request.headers['STRIPE_SIGNATURE']
 
     try:
