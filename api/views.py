@@ -148,7 +148,7 @@ def paymentReceived(request):
     stripe_product_id = event['data']['object']['id']
     subscription = Subscription.objects.filter(stripe_id=stripe_product_id).first()
 
-    request.user.subscription = subscription
-    request.user.save()
+    user.subscription = subscription
+    user.save()
 
     return Response({"message": "Payment received successfully"})
