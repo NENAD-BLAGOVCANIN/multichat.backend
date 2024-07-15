@@ -71,6 +71,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'multichat.wsgi.application'
 
+STRIPE_API_KEY = os.environ.get('STRIPE_API_KEY')
+STRIPE_ENDPOINT_SECRET = os.environ.get('STRIPE_ENDPOINT_SECRET')
 
 DATABASES = {
     'default': {

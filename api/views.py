@@ -11,6 +11,7 @@ from rest_framework import status
 from django.contrib.auth import authenticate, login
 from rest_framework.authtoken.models import Token
 import stripe
+from django.conf import settings
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -115,8 +116,8 @@ def userHasMaxTabs(user):
 @api_view(['POST'])
 def paymentReceived(request):
 
-    stripe.api_key = "sk_test_51I8KTqAHonOpKVtAcG8tFNejf9Q4ZpQviNN1Zch4b9ZJ1BsdRj4Kes3hd0VvxBBSqSpjG0k6F9A8Cwep605NW4N700bH2J6zx7"
-    endpoint_secret = 'whsec_xCKfcEvXHhwvPceNnrYVwGfCaunfHUqq'
+    stripe.api_key = settings.STRIPE_API_KEY
+    endpoint_secret = settings.STRIPE_ENDPOINT_SECRET
 
 
     event = None
