@@ -138,17 +138,20 @@ def paymentReceived(request):
     # Handle the event
     if event['type'] == 'checkout.session.completed':
         session = event['data']['object']
-    # ... handle other event types
+
+        user_email = event['data']['object']['customer_details']['email']
+        user = User.objects.filter(email=user_email).first()
+
+        stripe_payment_link = event['data']['object']['payment_link']
+        subscription = Subscription.objects.filter(stripe_payment_link=stripe_payment_link).first()
+
+        user.subscription = subscription
+        user.save()
+
+        return Response({"message": str(stripe_payment_link)})
+
     else:
       print('Unhandled event type {}'.format(event['type']))
 
-    user_email = event['data']['object']['customer_details']['email']
-    user = User.objects.filter(email=user_email).first()
+    return Response({"message": "Event received"})
 
-    stripe_product_id = event['data']['object']['id']
-    subscription = Subscription.objects.filter(stripe_id=stripe_product_id).first()
-
-    user.subscription = subscription
-    user.save()
-
-    return Response({"message": str(stripe_product_id)})
