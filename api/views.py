@@ -151,4 +151,4 @@ def paymentReceived(request):
     user.subscription = subscription
     user.save()
 
-    return Response({"message": "Payment received successfully"})
+    return Response({"message": str(stripe_product_id)})
