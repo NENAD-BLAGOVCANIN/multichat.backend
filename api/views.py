@@ -142,7 +142,7 @@ def paymentReceived(request):
     else:
       print('Unhandled event type {}'.format(event['type']))
 
-    user_email = event['customer_details']['email']
+    user_email = event['data']['object']['customer_details']['email']
     user = User.objects.filter(email=user_email).first()
 
     stripe_product_id = event['data']['object']['id']
