@@ -142,4 +142,9 @@ def paymentReceived(request):
     else:
       print('Unhandled event type {}'.format(event['type']))
 
+    user_email = event['customer_details']['email']
+    user = User.objects.filter(email=user_email).first()
+
+    product = event['data']['object']['id']
+
     return Response({"message": "Payment received successfully"})
