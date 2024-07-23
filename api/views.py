@@ -12,6 +12,7 @@ from django.contrib.auth import authenticate, login
 from rest_framework.authtoken.models import Token
 import stripe
 from django.conf import settings
+from django.db import transaction
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -173,3 +174,10 @@ def updateChatPositions(request):
             Chat.objects.filter(id=chat_id, user=user).update(position=position)
     
     return Response({"detail": "Positions updated successfully."}, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def getUsers(request):
+    users = User.objects.all()
+    serializer = UserSerializer(users, many=True)
+    return Response(serializer.data)
