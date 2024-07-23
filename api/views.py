@@ -37,8 +37,13 @@ def createNewChat(request):
     title = request.data.get("title")
     messaging_service_name = request.data.get("messaging_service")
     messaging_service = MessagingService.objects.filter(name=messaging_service_name).first()
-
-    chat = Chat.objects.create(title=title, messaging_service=messaging_service, user=request.user)
+    max_position = Chat.objects.filter(user=user).aggregate(Max('position'))['position__max'] or 0
+    chat = Chat.objects.create(
+        title=title,
+        messaging_service=messaging_service,
+        user=user,
+        position=max_position + 1
+    )
     serializer = ChatSerializer(chat, many=False, context={'request': request})
 
     return Response(serializer.data)
@@ -62,7 +67,7 @@ def editChat(request, chatId):
 @api_view(['GET'])
 def getChats(request):
 
-    chats = Chat.objects.filter(user=request.user)
+    chats = Chat.objects.filter(user=request.user).order_by('position')
 
     serializer = ChatSerializer(chats, many=True, context={'request': request})
     return Response(serializer.data)
@@ -155,3 +160,16 @@ def paymentReceived(request):
 
     return Response({"message": "Event received"})
 
+
+@api_view(['POST'])
+def updateChatPositions(request):
+    user = request.user
+    positions = request.data.get('positions', [])
+
+    with transaction.atomic():
+        for pos in positions:
+            chat_id = pos.get('id')
+            position = pos.get('position')
+            Chat.objects.filter(id=chat_id, user=user).update(position=position)
+    
+    return Response({"detail": "Positions updated successfully."}, status=status.HTTP_200_OK)

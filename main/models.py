@@ -108,9 +108,11 @@ class Chat(BaseModel):
     user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     notifications = models.BooleanField(default=True)
     audio_notifications = models.BooleanField(default=True)
-    
+    position = models.PositiveIntegerField(default=0)
+
     def __str__(self):
         return self.title
 
     class Meta:
         db_table = "chat"
+        ordering = ['position']

@@ -18,6 +18,7 @@ urlpatterns = [
     path('chat/<chatId>', editChat, name='api.editChat'),
     path('chats/get', getChats, name='api.getChats'),
     path('chats/delete/<chatId>', deleteChat, name='api.deleteChat'),
+    path('chats/update-position', updateChatPositions, name='api.updateChatPositions'),
 
 
     #Stripe
