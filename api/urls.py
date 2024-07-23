@@ -3,7 +3,7 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
-from .views import createNewChat, editChat, getChats, deleteChat, registerUser, getMyUserInfo, paymentReceived
+from .views import createNewChat, updateChatPositions, editChat, getChats, deleteChat, registerUser, getMyUserInfo, paymentReceived
 
 urlpatterns = [
 
@@ -18,7 +18,7 @@ urlpatterns = [
     path('chat/<chatId>', editChat, name='api.editChat'),
     path('chats/get', getChats, name='api.getChats'),
     path('chats/delete/<chatId>', deleteChat, name='api.deleteChat'),
-    path('chats/update-position', updateChatPositions, name='api.updateChatPositions'),
+    path('chats/update-positions', updateChatPositions, name='api.updateChatPositions'),
 
 
     #Stripe
