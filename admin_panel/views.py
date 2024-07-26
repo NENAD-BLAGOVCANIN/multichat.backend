@@ -36,7 +36,6 @@ def get_monthly_earnings(request):
     now = timezone.now()
     one_year_ago = now - timedelta(days=365)
 
-    # Truncate dates to months and sum payments for each month
     monthly_earnings = (
         Payment.objects
         .filter(created_at__gte=one_year_ago)
@@ -46,15 +45,13 @@ def get_monthly_earnings(request):
         .order_by('month')
     )
 
-    # Prepare data
     month_names = []
     earnings = []
     for i in range(12):
         month = (now - timedelta(days=30 * (11 - i))).strftime('%B %Y')
         month_names.append(month)
-        earnings.append(0)  # Default value if there's no data for the month
+        earnings.append(0)
 
-    # Map earnings to the correct month
     earnings_map = {entry['month'].strftime('%B %Y'): entry['total_earnings'] for entry in monthly_earnings}
     for i, month in enumerate(month_names):
         if month in earnings_map:
@@ -71,4 +68,11 @@ def get_monthly_earnings(request):
 def get_messaging_services(request):
     messaging_services = MessagingService.objects.all()
     serializer = MessagingServiceSerializer(messaging_services, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def get_subscriptions(request):
+    subscriptions = User.objects.exclude(subscription_id=1)
+    serializer = User(subscriptions, many=True)
     return Response(serializer.data)
