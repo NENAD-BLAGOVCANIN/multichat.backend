@@ -1,11 +1,12 @@
 from django.shortcuts import render
-from main.models import User, Payment
+from main.models import User, Payment, MessagingService
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.db.models import Sum
 from datetime import timedelta
 from django.db.models.functions import TruncMonth
 from django.utils import timezone
+from api.serializers import MessagingServiceSerializer
 
 @api_view(['GET'])
 def get_dashboard_stats(request):
@@ -66,3 +67,8 @@ def get_monthly_earnings(request):
 
     return Response(data)
 
+@api_view(['GET'])
+def get_messaging_services(request):
+    messaging_services = MessagingService.objects.all()
+    serializer = MessagingServiceSerializer(messaging_services, many=True)
+    return Response(serializer.data)
