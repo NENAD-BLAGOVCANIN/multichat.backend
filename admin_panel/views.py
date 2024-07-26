@@ -3,6 +3,9 @@ from main.models import User, Payment
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.db.models import Sum
+from datetime import timedelta
+from django.db.models.functions import TruncMonth
+from django.utils import timezone
 
 @api_view(['GET'])
 def get_dashboard_stats(request):
@@ -26,3 +29,40 @@ def get_dashboard_stats(request):
     }
     
     return Response(data)
+
+@api_view(['GET'])
+def get_monthly_earnings(request):
+    now = timezone.now()
+    one_year_ago = now - timedelta(days=365)
+
+    # Truncate dates to months and sum payments for each month
+    monthly_earnings = (
+        Payment.objects
+        .filter(created_at__gte=one_year_ago)
+        .annotate(month=TruncMonth('created_at'))
+        .values('month')
+        .annotate(total_earnings=Sum('amount'))
+        .order_by('month')
+    )
+
+    # Prepare data
+    month_names = []
+    earnings = []
+    for i in range(12):
+        month = (now - timedelta(days=30 * (11 - i))).strftime('%B %Y')
+        month_names.append(month)
+        earnings.append(0)  # Default value if there's no data for the month
+
+    # Map earnings to the correct month
+    earnings_map = {entry['month'].strftime('%B %Y'): entry['total_earnings'] for entry in monthly_earnings}
+    for i, month in enumerate(month_names):
+        if month in earnings_map:
+            earnings[i] = earnings_map[month]
+
+    data = {
+        'months': month_names,
+        'earnings': earnings,
+    }
+
+    return Response(data)
+
