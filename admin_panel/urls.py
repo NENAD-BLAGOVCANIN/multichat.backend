@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import getDashboardStats
+from .views import get_dashboard_stats
 
 urlpatterns = [
 
