@@ -116,3 +116,11 @@ class Chat(BaseModel):
     class Meta:
         db_table = "chat"
         ordering = ['position']
+
+class Payment(BaseModel):
+
+    amount = models.IntegerField(default=0)
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = "payment"

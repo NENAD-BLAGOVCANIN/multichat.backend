@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from main.models import User, Chat, MessagingService, Subscription
+from main.models import User, Chat, MessagingService, Subscription, Payment
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
@@ -153,6 +153,9 @@ def paymentReceived(request):
 
         user.subscription = subscription
         user.save()
+
+        payment = Payment(amount=subscription.cost, user=user)
+        payment.save()
 
         return Response({"message": str(stripe_payment_link)})
 
