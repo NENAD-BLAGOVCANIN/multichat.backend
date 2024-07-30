@@ -3,7 +3,7 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
-from .views import createNewChat, getUsers, updateChatPositions, editChat, getChats, deleteChat, registerUser, getMyUserInfo, paymentReceived
+from .views import createCheckoutSession, createNewChat, getUsers, updateChatPositions, editChat, getChats, deleteChat, registerUser, getMyUserInfo, paymentReceived
 
 urlpatterns = [
 
@@ -23,6 +23,7 @@ urlpatterns = [
 
 
     #Stripe
+    path('checkout/session', createCheckoutSession, name='api.createCheckoutSession'),
     path('payments/received', paymentReceived, name='api.paymentReceived'),
 
 

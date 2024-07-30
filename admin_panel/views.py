@@ -6,7 +6,7 @@ from django.db.models import Sum
 from datetime import timedelta
 from django.db.models.functions import TruncMonth
 from django.utils import timezone
-from api.serializers import MessagingServiceSerializer
+from api.serializers import MessagingServiceSerializer, UserSerializer
 
 @api_view(['GET'])
 def get_dashboard_stats(request):
@@ -74,5 +74,5 @@ def get_messaging_services(request):
 @api_view(['GET'])
 def get_subscriptions(request):
     subscriptions = User.objects.exclude(subscription_id=1)
-    serializer = User(subscriptions, many=True)
+    serializer = UserSerializer(subscriptions, many=True)
     return Response(serializer.data)
