@@ -1,12 +1,15 @@
 from django.shortcuts import render
-from main.models import User, Payment, MessagingService
+from user.models import User
+from payment.models import Payment
+from chat.models import MessagingService
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.db.models import Sum
 from datetime import timedelta
 from django.db.models.functions import TruncMonth
 from django.utils import timezone
-from api.serializers import MessagingServiceSerializer, UserSerializer
+from user.serializers import UserSerializer
+from chat.serializers import MessagingServiceSerializer
 
 @api_view(['GET'])
 def get_dashboard_stats(request):

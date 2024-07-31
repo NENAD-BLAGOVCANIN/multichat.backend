@@ -18,7 +18,7 @@ ALLOWED_HOSTS = ['*']
 #    "https://multi-chat.io",
 #]
 
-AUTH_USER_MODEL = "main.User"
+AUTH_USER_MODEL = "user.User"
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -27,11 +27,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'main',
-    'api',
     'admin_panel',
     'authentication',
+    'chat',
+    'user',
+    'payment',
+    'subscription',
     'rest_framework',
+    'common',
     'rest_framework_simplejwt.token_blacklist',
     'corsheaders'
 ]

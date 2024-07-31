@@ -1,29 +1,7 @@
 from django.db import models
-from django.utils import timezone
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
-
-class BaseModel(models.Model):
-    created_at = models.DateTimeField(auto_now=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    is_deleted = models.BooleanField(default=False)
-
-    class Meta:
-        abstract = True
-
-
-class Subscription(BaseModel):
-    title = models.CharField(max_length=50, default="WhatsApp")
-    stripe_payment_link = models.CharField(max_length=200, blank=True)
-    cost = models.IntegerField(default=0)
-    max_tabs = models.IntegerField(default=5, null=True)
-
-    def __str__(self):
-        return self.title
-
-    class Meta:
-        db_table = "subscription"
-
+from subscription.models import Subscription
 
 class MyUserManager(BaseUserManager):
     def create_user(self, email, username, password=None, name=None):
@@ -86,41 +64,3 @@ class User(AbstractBaseUser):
 
     class Meta:
         db_table = "user"
-
-
-
-class MessagingService(BaseModel):
-    title = models.CharField(max_length=50, default="WhatsApp")
-    url = models.CharField(max_length=150, default="https://web.whatsapp.com/")
-    name = models.CharField(max_length=50, default="whatsapp")
-    description = models.CharField(max_length=355)
-    icon = models.CharField(max_length=355, null=True)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        db_table = "messaging_service"
-
-class Chat(BaseModel):
-    title = models.CharField(max_length=255)
-    messaging_service = models.ForeignKey(MessagingService, default=None, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
-    notifications = models.BooleanField(default=True)
-    audio_notifications = models.BooleanField(default=True)
-    position = models.PositiveIntegerField(default=0)
-
-    def __str__(self):
-        return self.title
-
-    class Meta:
-        db_table = "chat"
-        ordering = ['position']
-
-class Payment(BaseModel):
-
-    amount = models.IntegerField(default=0)
-    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
-
-    class Meta:
-        db_table = "payment"
