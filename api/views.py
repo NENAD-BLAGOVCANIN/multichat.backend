@@ -3,27 +3,15 @@ from main.models import User, Chat, MessagingService, Subscription, Payment
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework_simplejwt.views import TokenObtainPairView
 from datetime import datetime, timedelta
 from .serializers import ChatSerializer, UserSerializer
 from rest_framework import status
 from django.contrib.auth import authenticate, login
-from rest_framework.authtoken.models import Token
 import stripe
 from django.conf import settings
 from django.db import transaction
 from django.http import HttpResponseBadRequest
 
-class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
-    @classmethod
-    def get_token(cls, user):
-        token = super().get_token(user)
-
-        token['email'] = user.email
-        token['username'] = user.username
-
-        return token
 
 @api_view(['POST'])
 def createNewChat(request):
@@ -81,21 +69,6 @@ def deleteChat(request, chatId):
     chat.delete()
 
     return Response("Success")
-
-@api_view(['POST'])
-def registerUser(request):
-    name = request.data.get("name")
-    email = request.data.get("email")
-    password = request.data.get("password")
-
-    if not all([name, email, password]):
-        return Response({"error": "Name, email, and password are required fields"}, status=status.HTTP_400_BAD_REQUEST)
-
-    try:
-        user = User.objects.create_user(email=email, username=email, password=password, name=name)
-        return Response({"message": "User created successfully"}, status=status.HTTP_201_CREATED)
-    except Exception as e:
-        return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET'])

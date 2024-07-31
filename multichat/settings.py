@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'main',
     'api',
     'admin_panel',
+    'authentication',
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
     'corsheaders'
@@ -125,7 +126,7 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_LIFETIME": timedelta(minutes=5),
     "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1),
 
-    "TOKEN_OBTAIN_SERIALIZER": "api.views.MyTokenObtainPairSerializer",
+    "TOKEN_OBTAIN_SERIALIZER": "authentication.views.MyTokenObtainPairSerializer",
     "TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSerializer",
     "TOKEN_VERIFY_SERIALIZER": "rest_framework_simplejwt.serializers.TokenVerifySerializer",
     "TOKEN_BLACKLIST_SERIALIZER": "rest_framework_simplejwt.serializers.TokenBlacklistSerializer",
