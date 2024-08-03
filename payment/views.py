@@ -33,14 +33,16 @@ def createCheckoutSession(request):
         payment_method_types=['card'],
         line_items=[
             {
-                'price': 'price_1PZMfgAHonOpKVtAX4HAfvCx',
+                'price': 'price_1PbseFAHonOpKVtAEf4ByUS1',
                 'quantity': 1,
             },
         ],
         mode='payment',
+        success_url='https://multi-chat.io/payment/success', 
+        cancel_url='https://multi-chat.io',
     )
 
-    return Response(checkout_session.url)
+    return redirect(checkout_session.url)
 
 
 @api_view(['POST'])

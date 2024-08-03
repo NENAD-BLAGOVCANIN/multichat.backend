@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
-from subscription.models import Subscription
 
 class MyUserManager(BaseUserManager):
     def create_user(self, email, username, password=None, name=None):
@@ -44,9 +43,6 @@ class User(AbstractBaseUser):
     is_deleted = models.BooleanField(default=False)
     notifications = models.BooleanField(default=True)
     audio_notifications = models.BooleanField(default=True)
-    subscription = models.ForeignKey(
-        Subscription, on_delete=models.SET_NULL, default=1, null=True
-    )
 
     objects = MyUserManager()
 

@@ -2,7 +2,7 @@ from django.db import models
 from common.models import BaseModel
 from django.utils import timezone
 from datetime import timedelta
-
+from user.models import User
 
 class Subscription(BaseModel):
     title = models.CharField(max_length=50, default="WhatsApp")
