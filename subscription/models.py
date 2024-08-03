@@ -1,5 +1,7 @@
 from django.db import models
 from common.models import BaseModel
+from django.utils import timezone
+from datetime import timedelta
 
 
 class Subscription(BaseModel):
@@ -13,3 +15,16 @@ class Subscription(BaseModel):
 
     class Meta:
         db_table = "subscription"
+
+class UserSubscription(BaseModel):
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    subscription = models.ForeignKey(Subscription, null=True, on_delete=models.CASCADE)
+    renewal_date = models.DateTimeField(null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.renewal_date:
+            self.renewal_date = timezone.now() + timedelta(days=30)
+        super(UserSubscription, self).save(*args, **kwargs)
+
+    class Meta:
+        db_table = "user_subscription"
