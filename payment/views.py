@@ -33,7 +33,7 @@ def createCheckoutSession(request):
         payment_method_types=['card'],
         line_items=[
             {
-                'price': 'price_1PbseFAHonOpKVtAEf4ByUS1',
+                'price': 'price_1PjeEwAHonOpKVtAopa6MBC5',
                 'quantity': 1,
             },
         ],
