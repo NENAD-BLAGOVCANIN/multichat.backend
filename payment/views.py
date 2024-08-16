@@ -38,12 +38,51 @@ def createCheckoutSession(request):
             },
         ],
         mode='payment',
-        success_url='https://multi-chat.io/payment/success', 
+        success_url='https://api.multi-chat.io/payments/success', 
         cancel_url='https://multi-chat.io',
     )
 
     return redirect(checkout_session.url)
 
+@api_view(['POST'])
+def paymentSuccess(request):
+    payload = request.body
+    sig_header = request.META['HTTP_STRIPE_SIGNATURE']
+    endpoint_secret = settings.STRIPE_ENDPOINT_SECRET
+
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, endpoint_secret
+        )
+    except ValueError as e:
+        # Invalid payload
+        return HttpResponseBadRequest(f"Invalid payload: {e}")
+    except stripe.error.SignatureVerificationError as e:
+        # Invalid signature
+        return HttpResponseBadRequest(f"Invalid signature: {e}")
+
+    if event['type'] == 'checkout.session.completed':
+        session = event['data']['object']
+
+        user_email = session['customer_details']['email']
+        user = User.objects.filter(email=user_email).first()
+
+        subscription = Subscription.objects.filter(id=1).first()
+
+        current_date = datetime.now()
+        renewal_date = current_date + timedelta(days=30)
+
+        user_subscription = UserSubscription(subscription=subscription, user=user, renewal_date=renewal_date)
+        user_subscription.save()
+        
+        payment = Payment(amount=subscription.cost, user=user)
+        payment.save()
+
+        return Response(status=status.HTTP_200_OK)
+
+
+    return Response(status=status.HTTP_400_BAD_REQUEST)
+    
 
 @api_view(['POST'])
 def paymentReceived(request):
