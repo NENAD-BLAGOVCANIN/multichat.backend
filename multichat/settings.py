@@ -4,11 +4,7 @@ from dotenv import load_dotenv
 import os
 import environ
 
-# base = environ.Path(__file__) - 1
-# environ.Env.read_env(env_file=base('.env'))
-
 env = environ.Env(
-    # set casting, default value
     DEBUG=(bool, False)
 )
 
