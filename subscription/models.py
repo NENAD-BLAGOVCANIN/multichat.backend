@@ -17,9 +17,14 @@ class Subscription(BaseModel):
         db_table = "subscription"
 
 class UserSubscription(BaseModel):
+
+    STATUS_ACTIVE = 'active'
+    STATUS_CANCELED = 'canceled'
+
     user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     subscription = models.ForeignKey(Subscription, null=True, on_delete=models.CASCADE)
     renewal_date = models.DateTimeField(null=True, blank=True)
+    status = models.CharField(max_length=200, default=STATUS_ACTIVE)
 
     def save(self, *args, **kwargs):
         if not self.renewal_date:
