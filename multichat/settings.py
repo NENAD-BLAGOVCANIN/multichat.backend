@@ -13,12 +13,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-#CORS_ALLOWED_ORIGINS = [
-#    "http://localhost:3000",
-#    "https://multi-chat.io",
-#]
-
 AUTH_USER_MODEL = "user.User"
+
+APP_URL = os.environ.get('APP_URL')
+WEBSITE_URL = os.environ.get('WEBSITE_URL')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
