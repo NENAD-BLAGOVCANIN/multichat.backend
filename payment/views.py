@@ -53,7 +53,8 @@ def paymentSuccess(request):
     user_id = request.GET.get('user_id', '')
     user = User.objects.get(id=user_id)
 
-    subscription = Subscription.objects.filter(id=1).first()
+    subscription_id = request.GET.get('subscription_id', '')
+    subscription = Subscription.objects.get(id=subscription_id)
 
     current_date = datetime.now()
     renewal_date = current_date + timedelta(days=30)
