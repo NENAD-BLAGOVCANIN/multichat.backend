@@ -41,7 +41,7 @@ def createCheckoutSession(request):
             },
         ],
         mode='payment',
-        success_url='http://localhost:8000/payments/success?subscription_id='+subscription_id+'&user_id='+user_id, 
+        success_url = f"{settings.APP_URL}/payments/success?subscription_id={subscription_id}&user_id={user_id}",
         cancel_url='https://multi-chat.io',
     )
 
@@ -64,7 +64,7 @@ def paymentSuccess(request):
     payment = Payment(amount=subscription.cost, user=user)
     payment.save()
 
-    return redirect('https://multi-chat.io/payments/success')
+    return redirect(f"{settings.WEBSITE_URL}/payments/success")
     
 
 @api_view(['POST'])
@@ -79,13 +79,10 @@ def paymentReceived(request):
     try:
         event = stripe.Webhook.construct_event(payload, sig_header, endpoint_secret)
     except ValueError as e:
-        # Invalid payload
         return HttpResponseBadRequest(f"Invalid payload: {str(e)}")
     except stripe.error.SignatureVerificationError as e:
-        # Invalid signature
         return HttpResponseBadRequest(f"Invalid signature: {str(e)}")
 
-    # Handle the event
     if event['type'] == 'checkout.session.completed':
         session = event['data']['object']
 
