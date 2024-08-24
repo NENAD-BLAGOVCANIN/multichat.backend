@@ -2,11 +2,20 @@ from pathlib import Path
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 import os
+import environ
 
-base = environ.Path(__file__) - 1
-environ.Env.read_env(env_file=base('.env'))
+# base = environ.Path(__file__) - 1
+# environ.Env.read_env(env_file=base('.env'))
+
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+
 
 SECRET_KEY = 'django-insecure-y5%o!nltc075ls)r9+3^cgkm4c5pa(8&m(@8pl+-mgjr+bjsqt'
 
@@ -16,8 +25,8 @@ ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = "user.User"
 
-APP_URL = os.getenv('APP_URL', '')
-WEBSITE_URL = os.getenv('WEBSITE_URL', '')
+APP_URL = env('APP_URL')
+WEBSITE_URL = env('WEBSITE_URL')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -75,17 +84,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'multichat.wsgi.application'
 
-STRIPE_API_KEY=os.getenv("STRIPE_API_KEY", "")
-STRIPE_ENDPOINT_SECRET=os.getenv("STRIPE_ENDPOINT_SECRET", "")
+STRIPE_API_KEY=env("STRIPE_API_KEY", "")
+STRIPE_ENDPOINT_SECRET=env("STRIPE_ENDPOINT_SECRET", "")
 
 DATABASES = {
     'default': {
-        'ENGINE': os.getenv('DB_ENGINE', ''), 
-        'NAME': os.getenv('DB_NAME', ''), 
-        'PORT': os.getenv('DB_PORT', ''), 
-        'PASSWORD': os.getenv('DB_PASSWORD', ''), 
-        'HOST': os.getenv('DB_HOST', ''), 
-        'USER': os.getenv('DB_USER', '')
+        'ENGINE': env('DB_ENGINE'), 
+        'NAME': env('DB_NAME'), 
+        'PORT': env('DB_PORT'), 
+        'PASSWORD': env('DB_PASSWORD'), 
+        'HOST': env('DB_HOST'), 
+        'USER': env('DB_USER')
     }
 }
 
