@@ -3,7 +3,8 @@ from datetime import datetime, timedelta
 from dotenv import load_dotenv
 import os
 
-load_dotenv()
+base = environ.Path(__file__) - 1
+environ.Env.read_env(env_file=base('.env'))
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -87,6 +88,8 @@ DATABASES = {
         'USER': os.getenv('DB_USER', '')
     }
 }
+
+print(DATABASES)
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
