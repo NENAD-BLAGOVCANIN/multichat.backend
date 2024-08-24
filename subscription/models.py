@@ -6,7 +6,7 @@ from user.models import User
 
 class Subscription(BaseModel):
     title = models.CharField(max_length=50, default="WhatsApp")
-    stripe_payment_link = models.CharField(max_length=200, blank=True)
+    price_id = models.CharField(max_length=200, blank=True)
     cost = models.IntegerField(default=0)
     max_tabs = models.IntegerField(default=5, null=True)
 

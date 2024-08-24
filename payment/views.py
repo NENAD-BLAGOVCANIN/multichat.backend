@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from user.models import User
 from chat.models import Chat, MessagingService
-from subscription.models import Subscription
+from subscription.models import Subscription, UserSubscription
 from payment.models import Payment
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -22,6 +22,9 @@ def createCheckoutSession(request):
     user_id = request.data.get("user_id")
     user = User.objects.get(id=user_id)
 
+    subscription_id = request.data.get("subscription_id")
+    subscription = Subscription.objects.get(id=subscription_id)
+
     stripe.api_key = settings.STRIPE_API_KEY
 
     customer = stripe.Customer.create(
@@ -33,55 +36,35 @@ def createCheckoutSession(request):
         payment_method_types=['card'],
         line_items=[
             {
-                'price': 'price_1PjeEwAHonOpKVtAopa6MBC5',
+                'price': subscription.price_id,
                 'quantity': 1,
             },
         ],
         mode='payment',
-        success_url='https://api.multi-chat.io/payments/success', 
+        success_url='http://localhost:8000/payments/success?subscription_id='+subscription_id+'&user_id='+user_id, 
         cancel_url='https://multi-chat.io',
     )
 
     return redirect(checkout_session.url)
 
-@api_view(['POST'])
+@api_view(['GET'])
 def paymentSuccess(request):
-    payload = request.body
-    sig_header = request.META['HTTP_STRIPE_SIGNATURE']
-    endpoint_secret = settings.STRIPE_ENDPOINT_SECRET
 
-    try:
-        event = stripe.Webhook.construct_event(
-            payload, sig_header, endpoint_secret
-        )
-    except ValueError as e:
-        # Invalid payload
-        return HttpResponseBadRequest(f"Invalid payload: {e}")
-    except stripe.error.SignatureVerificationError as e:
-        # Invalid signature
-        return HttpResponseBadRequest(f"Invalid signature: {e}")
+    user_id = request.GET.get('user_id', '')
+    user = User.objects.get(id=user_id)
 
-    if event['type'] == 'checkout.session.completed':
-        session = event['data']['object']
+    subscription = Subscription.objects.filter(id=1).first()
 
-        user_email = session['customer_details']['email']
-        user = User.objects.filter(email=user_email).first()
+    current_date = datetime.now()
+    renewal_date = current_date + timedelta(days=30)
 
-        subscription = Subscription.objects.filter(id=1).first()
+    user_subscription = UserSubscription(subscription=subscription, user=user, renewal_date=renewal_date)
+    user_subscription.save()
+    
+    payment = Payment(amount=subscription.cost, user=user)
+    payment.save()
 
-        current_date = datetime.now()
-        renewal_date = current_date + timedelta(days=30)
-
-        user_subscription = UserSubscription(subscription=subscription, user=user, renewal_date=renewal_date)
-        user_subscription.save()
-        
-        payment = Payment(amount=subscription.cost, user=user)
-        payment.save()
-
-        return Response(status=status.HTTP_200_OK)
-
-
-    return Response(status=status.HTTP_400_BAD_REQUEST)
+    return redirect('https://multi-chat.io/payments/success')
     
 
 @api_view(['POST'])
