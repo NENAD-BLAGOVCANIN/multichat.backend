@@ -15,8 +15,8 @@ ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = "user.User"
 
-APP_URL = os.environ.get('APP_URL')
-WEBSITE_URL = os.environ.get('WEBSITE_URL')
+APP_URL = os.getenv('APP_URL', '')
+WEBSITE_URL = os.getenv('WEBSITE_URL', '')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -74,17 +74,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'multichat.wsgi.application'
 
-STRIPE_API_KEY=os.environ.get('STRIPE_API_KEY')
-STRIPE_ENDPOINT_SECRET=os.environ.get('STRIPE_ENDPOINT_SECRET')
+STRIPE_API_KEY=os.getenv("STRIPE_API_KEY", "")
+STRIPE_ENDPOINT_SECRET=os.getenv("STRIPE_ENDPOINT_SECRET", "")
 
 DATABASES = {
     'default': {
-        'ENGINE': os.environ.get('DB_ENGINE'), 
-        'NAME': os.environ.get('DB_NAME'), 
-        'PORT': os.environ.get('DB_PORT'), 
-        'PASSWORD': os.environ.get('DB_PASSWORD'), 
-        'HOST': os.environ.get('DB_HOST'), 
-        'USER': os.environ.get('DB_USER')
+        'ENGINE': os.getenv('DB_ENGINE', ''), 
+        'NAME': os.getenv('DB_NAME', ''), 
+        'PORT': os.getenv('DB_PORT', ''), 
+        'PASSWORD': os.getenv('DB_PASSWORD', ''), 
+        'HOST': os.getenv('DB_HOST', ''), 
+        'USER': os.getenv('DB_USER', '')
     }
 }
 
