@@ -2,7 +2,6 @@ from django.db import models
 from common.models import BaseModel
 from django.utils import timezone
 from datetime import timedelta
-from user.models import User
 
 class Subscription(BaseModel):
     title = models.CharField(max_length=50, default="WhatsApp")
@@ -21,7 +20,7 @@ class UserSubscription(BaseModel):
     STATUS_ACTIVE = 'active'
     STATUS_CANCELED = 'canceled'
 
-    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    user = models.ForeignKey('user.User', null=True, on_delete=models.CASCADE)
     subscription = models.ForeignKey(Subscription, null=True, on_delete=models.CASCADE)
     renewal_date = models.DateTimeField(null=True, blank=True)
     status = models.CharField(max_length=200, default=STATUS_ACTIVE)

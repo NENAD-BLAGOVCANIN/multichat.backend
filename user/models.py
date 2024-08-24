@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
+from subscription.models import Subscription, UserSubscription
 
 class MyUserManager(BaseUserManager):
     def create_user(self, email, username, password=None, name=None):
@@ -57,6 +58,18 @@ class User(AbstractBaseUser):
         return self.is_admin
     def has_module_perms(self, app_label):
         return True
+
+    def get_subscription(self):
+        active_subscription = (
+            UserSubscription.objects.filter(user=self, status=UserSubscription.STATUS_ACTIVE)
+            .order_by('-id')
+            .first()
+        )
+        if active_subscription:
+            return active_subscription.subscription
+        else:
+            return Subscription.objects.get(id=1)
+
 
     class Meta:
         db_table = "user"
