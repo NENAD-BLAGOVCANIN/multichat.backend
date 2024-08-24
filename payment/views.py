@@ -26,7 +26,7 @@ def createCheckoutSession(request):
     subscription = Subscription.objects.get(id=subscription_id)
 
     stripe.api_key = settings.STRIPE_API_KEY
-    return Response(stripe.api_key)
+    return Response(settings.STRIPE_API_KEY)
 
     customer = stripe.Customer.create(
         email=user.email
