@@ -17,6 +17,17 @@ from django.db import transaction
 from django.http import HttpResponseBadRequest
 from .serializers import PaymentSerializer
 
+
+    
+@api_view(['GET'])
+def index(request):
+
+    payments = Payment.objects.all()
+
+    serializer = PaymentSerializer(payments, many=True)
+    return Response(serializer.data)
+
+    
 @api_view(['POST'])
 def createCheckoutSession(request):
 
@@ -118,7 +129,7 @@ def paymentReceived(request):
     return Response({"message": "Event received"})
 
 @api_view(['GET'])
-def get_my_payments(request):
+def get_payments(request):
 
     my_payments = Payment.objects.filter(user=request.user)
 
