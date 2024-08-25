@@ -78,11 +78,10 @@ def deleteChat(request, chatId):
 
 def userHasMaxTabs(user):
 
-    existing_users_tabs_count = Chat.objects.filter(user=user, is_deleted=0).count()
-    allowed_no_of_tabs = 5
+    subscription = user.get_subscription()
 
-    print(existing_users_tabs_count)
-    print(allowed_no_of_tabs)
+    existing_users_tabs_count = Chat.objects.filter(user=user, is_deleted=0).count()
+    allowed_no_of_tabs = subscription.max_tabs
 
     if(existing_users_tabs_count==allowed_no_of_tabs):
         return True
