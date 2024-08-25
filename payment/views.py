@@ -129,7 +129,7 @@ def paymentReceived(request):
     return Response({"message": "Event received"})
 
 @api_view(['GET'])
-def get_payments(request):
+def get_my_payments(request):
 
     my_payments = Payment.objects.filter(user=request.user)
 
