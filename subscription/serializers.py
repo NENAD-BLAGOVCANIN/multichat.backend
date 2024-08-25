@@ -7,6 +7,12 @@ class SubscriptionSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class UserSubscriptionSerializer(serializers.ModelSerializer):
+    user = serializers.SerializerMethodField()
+
     class Meta:
         model = UserSubscription
         fields = '__all__'
+
+    def get_user(self, obj):
+        from user.serializers import UserSerializer
+        return UserSerializer(obj.user).data
