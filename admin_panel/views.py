@@ -10,13 +10,15 @@ from django.db.models.functions import TruncMonth
 from django.utils import timezone
 from user.serializers import UserSerializer
 from chat.serializers import MessagingServiceSerializer
+from subscription.serializers import SubscriptionSerializer, UserSubscriptionSerializer
+from subscription.models import Subscription, UserSubscription
 
 @api_view(['GET'])
 def get_dashboard_stats(request):
     total_number_of_users = User.objects.count()
-    number_of_subscribed_users = User.objects.exclude(subscription_id=1).count()
-    number_of_standard_subscribed_users = User.objects.filter(subscription_id=2).count()
-    number_of_pro_subscribed_users = User.objects.filter(subscription_id=3).count()
+    number_of_subscribed_users = UserSubscription.objects.filter(status=UserSubscription.STATUS_ACTIVE).exclude(subscription_id=1).count()
+    number_of_standard_subscribed_users = UserSubscription.objects.filter(status=UserSubscription.STATUS_ACTIVE).filter(subscription_id=2).count()
+    number_of_pro_subscribed_users = UserSubscription.objects.filter(status=UserSubscription.STATUS_ACTIVE).filter(subscription_id=3).count()
 
 
     total_earnings = Payment.objects.aggregate(total=Sum('amount'))['total']
@@ -76,6 +78,6 @@ def get_messaging_services(request):
 
 @api_view(['GET'])
 def get_subscriptions(request):
-    subscriptions = User.objects.exclude(subscription_id=1)
-    serializer = UserSerializer(subscriptions, many=True)
+    subscriptions = UserSubscription.objects.exclude(subscription_id=1)
+    serializer = UserSubscriptionSerializer(subscriptions, many=True)
     return Response(serializer.data)
