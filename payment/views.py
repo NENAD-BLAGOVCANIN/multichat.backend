@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from user.models import User
+from .models import Payment
 from chat.models import Chat, MessagingService
 from subscription.models import Subscription, UserSubscription
 from payment.models import Payment
@@ -14,7 +15,7 @@ import stripe
 from django.conf import settings
 from django.db import transaction
 from django.http import HttpResponseBadRequest
-
+from .serializers import PaymentSerializer
 
 @api_view(['POST'])
 def createCheckoutSession(request):
@@ -115,3 +116,11 @@ def paymentReceived(request):
         print('Unhandled event type {}'.format(event['type']))
 
     return Response({"message": "Event received"})
+
+@api_view(['GET'])
+def get_my_payments(request):
+
+    my_payments = Payment.objects.filter(user=request.user)
+
+    serializer = PaymentSerializer(my_payments, many=True)
+    return Response(serializer.data)
