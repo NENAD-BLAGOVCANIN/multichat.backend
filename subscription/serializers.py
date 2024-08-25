@@ -8,6 +8,7 @@ class SubscriptionSerializer(serializers.ModelSerializer):
 
 class UserSubscriptionSerializer(serializers.ModelSerializer):
     user = serializers.SerializerMethodField()
+    subscription = SubscriptionSerializer()
 
     class Meta:
         model = UserSubscription
